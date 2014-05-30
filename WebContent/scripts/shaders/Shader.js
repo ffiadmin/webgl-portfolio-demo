@@ -1,0 +1,3 @@
+function Shader() {
+	this.code = '';
+}
