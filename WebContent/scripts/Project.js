@@ -11,6 +11,7 @@ function Project(canvasID) {
 
 //Create the shader program
 	this.shader = new ShaderManager(this.gl);
+	this.shader.setAttribute('a_Size', 10);
 	
 	this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 	this.gl.clear(this.gl.COLOR_BUFFER_BIT);
