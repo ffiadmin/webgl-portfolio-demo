@@ -11,12 +11,14 @@ function Project(canvasID) {
 
 //Create the shader program
 	this.shader = new ShaderManager(this.gl);
-	this.shader.setAttribute('a_Size', 10);
 	
-	this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-	this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+//Create a camera
+	this.camera = new Camera(this.gl, this.shader);
+	this.camera.placeCamera(0, 0, 0);
 	
-	this.gl.drawArrays(this.gl.POINTS, 0, 1);
+//Draw a cube
+	var cube = new Cube(this.gl, this.shader);
+	cube.draw();
 }
 
 // Thank you: https://code.google.com/p/webglsamples/source/browse/book/webgl-utils.js?r=41401f8a69b1f8d32c6863ac8c1953c8e1e8eba0

@@ -169,6 +169,10 @@ ShaderManager.prototype.setAttribute = function(attributeName, value, type) {
 	return false;
 };
 
+ShaderManager.prototype.getUniform = function(uniformName) {	
+	return this.gl.getUniformLocation(this.gl.program, uniformName);
+};
+
 ShaderManager.prototype.type = {
 	FLOAT  : "f",
 	FLOAT1 : "1f",

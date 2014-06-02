@@ -1,9 +1,15 @@
 function FragmentShader() {
 	Shader.call(this);
 	
-	this.code = 
+	this.code =
+	'#ifdef GL_ES\n' + 
+	'precision mediump float;\n' + 
+	'#endif\n' + 
+	'\n' + 
+	'varying vec4 v_Color;\n' + 
+	'\n' + 
 	'void main() {\n' +  
-	'	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' + 
+	'	gl_FragColor = v_Color;\n' + 
 	'}';
 }
 
