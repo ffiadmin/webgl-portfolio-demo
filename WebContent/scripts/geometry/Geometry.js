@@ -36,13 +36,13 @@ Geometry.prototype.commit = function(vertexVariableName, colorVariableName) {
 	}
 	
 	this.JSColorFloatBuffer = new Float32Array(colorList);
-	this.colors = this.JSColorFloatBuffer.length / 4; //4 data pointer per color
+	this.colors = this.JSColorFloatBuffer.length / 4; //4 data points per color
 	
 	this.JSVertexFloatBuffer = new Float32Array(this.JSVertexBuffer);
 	this.vertices = this.JSVertexFloatBuffer.length / 3; //3 data points per vertex
-	console.log(this.JSVertexFloatBuffer);
+	console.log(vertexVariableName);
 //Add the data to the buffer
-	//this.colorBuffer.addData(this.JSColorFloatBuffer, colorVariableName, 1, this.gl.FLOAT);    // 1 data point for a color
+	this.colorBuffer.addData(this.JSColorFloatBuffer, colorVariableName, 4, this.gl.FLOAT);    // 4 data points for a color
 	this.vertexBuffer.addData(this.JSVertexFloatBuffer, vertexVariableName, 3, this.gl.FLOAT); // 3 vertices for a triangle
 };
 
@@ -62,4 +62,3 @@ Geometry.prototype.draw = function() {
 	this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 	this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertices);
 };
-

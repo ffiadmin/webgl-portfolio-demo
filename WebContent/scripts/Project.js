@@ -14,7 +14,7 @@ function Project(canvasID) {
 	
 //Create a camera
 	this.camera = new Camera(this.gl, this.shader);
-	this.camera.placeCamera(0, 0, 0);
+	this.camera.placeCamera(10, 10, 10);
 	
 //Draw a cube
 	var cube = new Cube(this.gl, this.shader);
