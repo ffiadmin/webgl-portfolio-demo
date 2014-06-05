@@ -8,17 +8,21 @@ function Project(canvasID) {
 	
 //Get the WebGL context
 	this.gl = this.getWebGLContext();
+	this.gl.enable(this.gl.DEPTH_TEST);
 
 //Create the shader program
 	this.shader = new ShaderManager(this.gl);
 	
 //Create a camera
 	this.camera = new Camera(this.gl, this.shader);
-	this.camera.placeCamera(10, 10, 10);
+	this.camera.placeCamera(100, 100, 100);
 	
 //Draw a cube
 	var cube = new Cube(this.gl, this.shader);
+	cube.begin();
+	cube.applyScale(100, 0.1, 100);
 	cube.draw();
+	cube.end();
 }
 
 // Thank you: https://code.google.com/p/webglsamples/source/browse/book/webgl-utils.js?r=41401f8a69b1f8d32c6863ac8c1953c8e1e8eba0
