@@ -92,12 +92,23 @@ Geometry.prototype.draw = function() {
 //Draw the geometry
 	this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertices);
 	
-//Reset the transformation matrix
-	this.modelMatrix.setIdentity();
+//Reset the cube for the next draw
+	this.reset();
 };
 
 Geometry.prototype.end = function() {
 	this.gl.flush();
+};
+
+Geometry.prototype.reset = function() {
+//Reset the transformation matrix
+	this.modelMatrix.setIdentity();
+	
+//Reset all of the local transformation data
+	this.rotateAngle = 0;
+	this.rotate = new Float32Array([0, 0, 0]);
+	this.scale = new Float32Array([1, 1, 1]);
+	this.translate = new Float32Array([0, 0, 0]);
 };
 
 Geometry.prototype.modelMatrix = new Matrix4();

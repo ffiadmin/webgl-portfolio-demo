@@ -15,14 +15,20 @@ function Project(canvasID) {
 	
 //Create a camera
 	this.camera = new Camera(this.gl, this.shader);
-	this.camera.placeCamera(100, 100, 100);
+	this.camera.placeCamera(30, 30, 30);
 	
 //Draw a cube
 	var cube = new Cube(this.gl, this.shader);
-	cube.begin();
-	cube.applyScale(100, 0.1, 100);
-	cube.draw();
-	cube.end();
+	setInterval(function() {
+		cube.begin();
+		cube.applyScale(500, 0.1, 500);
+		cube.draw();
+		
+		cube.applyScale(10, 30, 10);
+		cube.applyTranslate(-150, 0, -150);
+		cube.draw();
+		cube.end();
+	}, 10);	
 }
 
 // Thank you: https://code.google.com/p/webglsamples/source/browse/book/webgl-utils.js?r=41401f8a69b1f8d32c6863ac8c1953c8e1e8eba0
