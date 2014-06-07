@@ -73,13 +73,13 @@ Geometry.prototype.commit = function(vertexVariableName, colorVariableName) {
 };
 
 Geometry.prototype.draw = function() {
-//Rotate
-	if (this.rotate[0] != 0 || this.rotate[1] != 0 || this.rotate[2] != 0)
-		this.modelMatrix.rotate(this.rotateAngle, this.rotate[0], this.rotate[1], this.rotate[2]);
-	
 //Translate
 	if (this.translate[0] != 0 || this.translate[1] != 0 || this.translate[2] != 0)
 		this.modelMatrix.translate(this.translate[0], this.translate[1], this.translate[2]);
+	
+//Rotate
+	if (this.rotate[0] != 0 || this.rotate[1] != 0 || this.rotate[2] != 0)
+		this.modelMatrix.rotate(this.rotateAngle, this.rotate[0], this.rotate[1], this.rotate[2]);
 	
 //Scale
 	if (this.scale[0] != 0 || this.scale[1] != 0 || this.scale[2] != 0)

@@ -21,11 +21,72 @@ function Project(canvasID) {
 	var cube = new Cube(this.gl, this.shader);
 	setInterval(function() {
 		cube.begin();
-		cube.applyScale(500, 0.1, 500);
+		
+	//Floor
+		cube.applyScale(450, 0.1, 450);
 		cube.draw();
 		
-		cube.applyScale(10, 30, 10);
-		cube.applyTranslate(-150, 0, -150);
+	//Ceiling
+		cube.applyScale(450, 0.1, 450);
+		cube.applyTranslate(0, 30, 0);
+		cube.draw();
+		
+	//Cove 1
+		cube.applyRotate(90, 0, 1, 0);
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(225, 15, 0);
+		cube.draw();
+		
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(150, 15, 75);
+		cube.draw();
+		
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(150, 15, -75);
+		cube.draw();
+		
+	//Cove 2
+		cube.applyRotate(90, 0, 1, 0);
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(-225, 15, 0);
+		cube.draw();
+		
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(-150, 15, 75);
+		cube.draw();
+		
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(-150, 15, -75);
+		cube.draw();
+		
+	//Cove 3
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(0, 15, 225);
+		cube.draw();
+		
+		cube.applyRotate(90, 0, 1, 0);
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(75, 15, 150);
+		cube.draw();
+		
+		cube.applyRotate(90, 0, 1, 0);
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(-75, 15, 150);
+		cube.draw();
+		
+	//Cove 4
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(0, 15, -225);
+		cube.draw();
+		
+		cube.applyRotate(90, 0, 1, 0);
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(75, 15, -150);
+		cube.draw();
+		
+		cube.applyRotate(90, 0, 1, 0);
+		cube.applyScale(150, 30, 1);
+		cube.applyTranslate(-75, 15, -150);
 		cube.draw();
 		cube.end();
 	}, 10);	
