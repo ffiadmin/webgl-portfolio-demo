@@ -1,26 +1,27 @@
 function Geometry(glContext, shaderMgr) {
 	this.modelMatrix.setIdentity();
 	
+//Color buffer
+	this.colors = 0;
+	this.JSColorBuffer = new Array();
+	this.JSColorFloatBuffer = null;
+	
+//Normal buffer
+	this.JSNormalBuffer = new Array();
+	this.JSNormalFloatBuffer = null;
+	this.normals = 0;
+	
+//Vertex buffer
+	this.JSVertexBuffer = new Array();
+	this.JSVertexFloatBuffer = null;
+	this.vertices = 0;
+		
 	if (glContext !== undefined) {
 		this.gl = glContext;
 		this.shader = shaderMgr;
 		
-	//Color buffer
 		this.colorBuffer = new Buffer(this.gl, this.shader, glContext.ARRAY_BUFFER);
-		this.colors = 0;
-		this.JSColorBuffer = new Array();
-		this.JSColorFloatBuffer = null;
-		
-	//Normal buffer
-		this.JSNormalBuffer = new Array();
-		this.JSNormalFloatBuffer = null;
-		this.normals = 0;
 		this.normalBuffer = new Buffer(this.gl, this.shader, glContext.ARRAY_BUFFER);
-		
-	//Vertex buffer
-		this.JSVertexBuffer = new Array();
-		this.JSVertexFloatBuffer = null;
-		this.vertices = 0;
 		this.vertexBuffer = new Buffer(this.gl, this.shader, glContext.ARRAY_BUFFER);
 	}
 }

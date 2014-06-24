@@ -17,8 +17,16 @@ function Project(canvasID) {
 	this.camera = new Camera(this.gl, this.shader);
 	this.camera.placeCamera(30, 30, 30);
 	
-//Draw a cube
+//Draw stuff
 	var cube = new Cube(this.gl, this.shader);
+	var cylinder = new Surfrev(this.gl, this.shader);
+	cylinder.addPolyline([
+	    [ 0, 0, 0 ],
+	    [ 1, 0, 0 ],
+	    [ 1, 1, 0 ],
+	    [ 0, 1, 0 ]
+	], 3);
+	
 	setInterval(function() {
 		cube.begin();
 		
@@ -88,6 +96,10 @@ function Project(canvasID) {
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(-75, 15, -150);
 		cube.draw();
+		
+	//Draw a cylinder
+		cylinder.draw();
+		
 		cube.end();
 	}, 10);	
 }

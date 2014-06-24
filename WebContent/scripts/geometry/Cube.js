@@ -87,8 +87,7 @@ function Cube(glContext, shaderMgr) {
 	this.addVertex( 0.5,  0.5, -0.5, Geometry.colors.BLUE); //End top side*/
 	
 //Add the vertices to the buffer
-	this.commit('a_Triangle', 'a_Color');
+	//this.commit('a_Triangle', 'a_Color');
 }
 
-Cube.prototype = new Geometry();
-Cube.prototype.constructor = Geometry;
+extend(Geometry, Cube);

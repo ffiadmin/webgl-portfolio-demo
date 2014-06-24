@@ -12,9 +12,9 @@ Surfrev.prototype.addPolyline = function(polyline, slices) {
 	var points = polyline.length;
 	var rotNow, rotNext, rotNNext, rotNNNext;
 	
-	for(var i = 0; i < slices; ++i) {
-		for(var j = 0; j < points; ++j) {
-		//If any the points touch the Y-axis, only build a triangle
+	for(var i = 0; i <= slices; ++i) {
+		for(var j = 0; j < points - 1; ++j) {
+		//If any the vertices touch the Y-axis, only build a triangle
 			if (polyline[j][1] == 0 || polyline[j + 1][1] == 0) {
 				rotNow = this.rotateY(polyline[j], degrees * i);
 				rotNext = this.rotateY(polyline[j + 1], degrees * (i + 1));
@@ -23,12 +23,30 @@ Surfrev.prototype.addPolyline = function(polyline, slices) {
 				this.addVertex(rotNow[0], rotNow[1], rotNow[2], Geometry.colors.RED);
 				this.addVertex(rotNext[0], rotNext[1], rotNext[2], Geometry.colors.GREEN);
 				this.addVertex(rotNNext[0], rotNNext[1], rotNNext[2], Geometry.colors.BLUE);
-		//
+		//If no vertices touch the Y-axis, draw a quad
 			} else {
+				rotNow = this.rotateY(polyline[j], degrees * i);
+				rotNext = this.rotateY(polyline[j], degrees * (i + 1));
+				rotNNext = this.rotateY(polyline[j + 1], degrees * i);
+				rotNNNext = this.rotateY(polyline[j + 1], degrees * (i + 1));
 				
+			//Triangle one
+				this.addVertex(rotNow[0], rotNow[1], rotNow[2], Geometry.colors.RED);
+				this.addVertex(rotNext[0], rotNext[1], rotNext[2], Geometry.colors.GREEN);
+				this.addVertex(rotNNext[0], rotNNext[1], rotNNext[2], Geometry.colors.BLUE);
+				
+			//Triangle two
+				this.addVertex(rotNNext[0], rotNNext[1], rotNNext[2], Geometry.colors.RED);
+				this.addVertex(rotNext[0], rotNext[1], rotNext[2], Geometry.colors.GREEN);
+				this.addVertex(rotNNNext[0], rotNNNext[1], rotNNNext[2], Geometry.colors.BLUE);
 			}
 		}
-	}	
+	}
+	
+	
+	
+//Add the vertices to the buffer
+	this.commit('a_Triangle', 'a_Color');
 };
 
 Surfrev.prototype.rotateY = function(point, degrees) {
@@ -45,5 +63,4 @@ Surfrev.prototype.rotateY = function(point, degrees) {
 	         -point[0] * Math.sin(radians) + point[2] * Math.cos(radians) ];
 };
 
-Surfrev.prototype = new Geometry();
-Surfrev.prototype.constructor = Geometry;
+extend(Geometry, Surfrev);
