@@ -148,7 +148,7 @@ Geometry.prototype.draw = function() {
 //Draw the geometry
 	this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertices);
 	
-//Reset the cube for the next draw
+//Reset the geometry for the next draw
 	this.reset();
 };
 

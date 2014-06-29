@@ -23,9 +23,12 @@ function Project(canvasID) {
 	cylinder.addPolyline([
 	    [ 0, 0, 0 ],
 	    [ 1, 0, 0 ],
-	    [ 1, 1, 0 ],
-	    [ 0, 1, 0 ]
-	], 3);
+	    [ 5, 2, 0 ],
+	    [ 1, 4, 0 ],
+	    [ 0, 4, 0 ]
+	], 5);
+	
+	this.shader.commit();
 	
 	setInterval(function() {
 		cube.begin();
