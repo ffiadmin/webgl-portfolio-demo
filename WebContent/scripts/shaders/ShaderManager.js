@@ -34,9 +34,13 @@ ShaderManager.prototype.commit = function() {
 		
 	//If so, merge the new data with the existing
 		if (exist) {
-			console.log(this.bufferRegistry[i].data);
-			writer[index][1].data.set(this.bufferRegistry[i].data, writer[index][1].data.length - 1); //Type: Float32Array
+			var first = writer[index][1].data.length;
+			var second = this.bufferRegistry[i].data.length;
+			var temp = writer[index][1].data;
 			
+			writer[index][1].data = new Float32Array(first + second);
+			writer[index][1].data.set(temp);
+			writer[index][1].data.set(this.bufferRegistry[i].data, first);
 	//Otherwise, add the buffer to the dictionary
 		} else {
 			writer.push(new Array(this.bufferRegistry[i].shaderVariableName, this.bufferRegistry[i]));
@@ -65,6 +69,8 @@ ShaderManager.prototype.commit = function() {
 	//Enable assignment to the shader variable
 		this.gl.enableVertexAttribArray(attribute);
 	}
+	
+console.log(writer);
 };
 
 ShaderManager.prototype.createProgram = function() {

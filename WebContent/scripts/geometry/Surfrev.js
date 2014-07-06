@@ -32,7 +32,7 @@ Surfrev.prototype.addPolyline = function(polyline, slices) {
 			this.addVertex(rotNNext[0], rotNNext[1], rotNNext[2], Geometry.colors.BLUE);
 		}
 	}
-
+	
 //Add the vertices to the buffer
 	this.commit('a_Triangle', 'a_Color');
 };

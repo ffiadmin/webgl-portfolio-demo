@@ -18,7 +18,6 @@ function Project(canvasID) {
 	this.camera.placeCamera(30, 30, 30);
 	
 //Draw stuff
-	var cube = new Cube(this.gl, this.shader);
 	var cylinder = new Surfrev(this.gl, this.shader);
 	cylinder.addPolyline([
 	    [ 0, 0, 0 ],
@@ -26,7 +25,9 @@ function Project(canvasID) {
 	    [ 5, 2, 0 ],
 	    [ 1, 4, 0 ],
 	    [ 0, 4, 0 ]
-	], 5);
+	], 3);
+	
+	var cube = new Cube(this.gl, this.shader);
 	
 	this.shader.commit();
 	
@@ -34,73 +35,75 @@ function Project(canvasID) {
 		cube.begin();
 		
 	//Floor
-		cube.applyScale(450, 0.1, 450);
-		cube.draw();
+		//cube.applyScale(450, 0.1, 450);
+		//cube.draw();
 		
 	//Ceiling
-		cube.applyScale(450, 0.1, 450);
-		cube.applyTranslate(0, 30, 0);
-		cube.draw();
-		
+		//cube.applyScale(450, 0.1, 450);
+		//cube.applyTranslate(0, 30, 0);
+		//cube.draw();
+		/*
 	//Cove 1
 		cube.applyRotate(90, 0, 1, 0);
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(225, 15, 0);
-		cube.draw();
+		//cube.draw();
 		
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(150, 15, 75);
-		cube.draw();
+		//cube.draw();
 		
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(150, 15, -75);
-		cube.draw();
+		//cube.draw();
 		
 	//Cove 2
 		cube.applyRotate(90, 0, 1, 0);
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(-225, 15, 0);
-		cube.draw();
+		//cube.draw();
 		
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(-150, 15, 75);
-		cube.draw();
+		//cube.draw();
 		
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(-150, 15, -75);
-		cube.draw();
+		//cube.draw();
 		
 	//Cove 3
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(0, 15, 225);
-		cube.draw();
+		//cube.draw();
 		
 		cube.applyRotate(90, 0, 1, 0);
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(75, 15, 150);
-		cube.draw();
+		//cube.draw();
 		
 		cube.applyRotate(90, 0, 1, 0);
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(-75, 15, 150);
-		cube.draw();
+		//cube.draw();
 		
 	//Cove 4
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(0, 15, -225);
-		cube.draw();
+		//cube.draw();
 		
 		cube.applyRotate(90, 0, 1, 0);
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(75, 15, -150);
 		cube.draw();
-		
+		*/
 		cube.applyRotate(90, 0, 1, 0);
 		cube.applyScale(150, 30, 1);
 		cube.applyTranslate(-75, 15, -150);
 		cube.draw();
 		
 	//Draw a cylinder
+		//cylinder.applyRotate(rotate, 1, 0, 0);
+		cylinder.applyScale(2, 2, 2);
 		cylinder.draw();
 		
 		cube.end();
