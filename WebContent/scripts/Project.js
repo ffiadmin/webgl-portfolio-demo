@@ -25,14 +25,12 @@ function Project(canvasID) {
 	    [ 5, 2, 0 ],
 	    [ 1, 4, 0 ],
 	    [ 0, 4, 0 ]
-	], 3);
+	], 30);
 	
 	var cube = new Cube(this.gl, this.shader);
 	
-	this.shader.commit();
-	
 	setInterval(function() {
-		cube.begin();
+		cylinder.begin();
 		
 	//Floor
 		//cube.applyScale(450, 0.1, 450);
@@ -96,17 +94,17 @@ function Project(canvasID) {
 		cube.applyTranslate(75, 15, -150);
 		cube.draw();
 		*/
-		cube.applyRotate(90, 0, 1, 0);
-		cube.applyScale(150, 30, 1);
-		cube.applyTranslate(-75, 15, -150);
-		cube.draw();
+		//cube.applyRotate(90, 0, 1, 0);
+		//cube.applyScale(150, 30, 1);
+		//cube.applyTranslate(-75, 15, -150);
+		//cube.draw();
 		
 	//Draw a cylinder
 		//cylinder.applyRotate(rotate, 1, 0, 0);
-		cylinder.applyScale(2, 2, 2);
+		//cylinder.applyScale(2, 2, 2);
 		cylinder.draw();
 		
-		cube.end();
+		cylinder.end();
 	}, 10);	
 }
 

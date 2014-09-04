@@ -3,76 +3,6 @@ function ShaderManager(glContext) {
 	this.initShaders();
 }
 
-ShaderManager.prototype.bufferRegistry = new Array();
-
-ShaderManager.prototype.commit = function() {
-//Are there any registered buffers?
-	if (this.bufferRegistry.length == 0) {
-		throw new Fatal('No JavaScript buffer objects have been registered for entry into the WebGL buffer', 'ShaderManager.js');
-	}
-	
-//Just a performance note
-	new Info('Performance note: calling ShaderManager.commit() should only be done once, otherwise performance could be impacted', 'ShaderManager.js');
-	
-//Collapse all similar buffer types together, that is, all buffers writing to the same shader variable are combined
-	var exist = false;
-	var index = 0;
-	var writer = new Array(); // Key, value collection holding <target shader variable, JS buffer object>
-	
-	for(var i = 0; i < this.bufferRegistry.length; ++i) {
-		exist = false;
-		index = 0;
-		
-	//Does this variable already exist?
-		for(var j = 0; j < writer.length; ++j) {
-			if (writer[j][0] == this.bufferRegistry[i].shaderVariableName) {
-				exist = true;
-				index = j;
-				break;
-			}
-		}
-		
-	//If so, merge the new data with the existing
-		if (exist) {
-			var first = writer[index][1].data.length;
-			var second = this.bufferRegistry[i].data.length;
-			var temp = writer[index][1].data;
-			
-			writer[index][1].data = new Float32Array(first + second);
-			writer[index][1].data.set(temp);
-			writer[index][1].data.set(this.bufferRegistry[i].data, first);
-	//Otherwise, add the buffer to the dictionary
-		} else {
-			writer.push(new Array(this.bufferRegistry[i].shaderVariableName, this.bufferRegistry[i]));
-		}
-	}
-	
-//Commit the consolidated data to the buffer
-	for(var i = 0; i < writer.length; ++i) {
-	//Create the buffer
-		var buffer = this.gl.createBuffer();
-		
-		if (!buffer) {
-			throw new Fatal('The requested buffer could not be created', 'ShaderManager.js');
-		}
-		
-	//Bind the buffer object to the target
-		this.gl.bindBuffer(writer[i][1].type, buffer);
-		
-	//Get the shader variable
-		var attribute = this.getAttribute(writer[i][1].shaderVariableName);
-		
-	//Add data to the buffer and assign it to a shader variable
-		this.gl.bufferData(writer[i][1].type, writer[i][1].data, this.gl.STATIC_DRAW);
-		this.gl.vertexAttribPointer(attribute, writer[i][1].numComponentsPerVertex, writer[i][1].GLSLType, false, 0, 0);
-		
-	//Enable assignment to the shader variable
-		this.gl.enableVertexAttribArray(attribute);
-	}
-	
-console.log(writer);
-};
-
 ShaderManager.prototype.createProgram = function() {
 //Create the shader objects
 	var fragment = this.loadShader(this.gl.FRAGMENT_SHADER, new FragmentShader());
@@ -240,10 +170,6 @@ ShaderManager.prototype.setAttribute = function(attributeName, value, type) {
 
 ShaderManager.prototype.getUniform = function(uniformName) {	
 	return this.gl.getUniformLocation(this.gl.program, uniformName);
-};
-
-ShaderManager.prototype.registerJSBuffer = function(buffer) {
-	this.bufferRegistry.push(buffer);
 };
 
 ShaderManager.prototype.type = {
